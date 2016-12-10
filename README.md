@@ -1,2 +1,2 @@
 ##Tetris
-Tetris code by ES6 and scss
+Tetris code by ES6 and scss.
