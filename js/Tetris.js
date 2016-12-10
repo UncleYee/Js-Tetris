@@ -12,10 +12,14 @@ document.onkeydown = (event) => {
   if (event) {
     switch(event.keyCode){
       case 37: { // 左
-       model.style.left = parseInt(left - move, 10) + 'px';
+        if (left >= 20) {
+          model.style.left = parseInt(left - move, 10) + 'px';
+        }
       }; break;
       case 38: { // 上
-        model.style.top = parseInt(top - move, 10) + 'px';
+        if ( top >= 20) {
+          model.style.top = parseInt(top - move, 10) + 'px';
+        }
       }; break;
       case 39: { // 右
         model.style.left = parseInt(left + move, 10) + 'px';
@@ -23,6 +27,7 @@ document.onkeydown = (event) => {
       case 40: { // 下
         model.style.top = parseInt(top + move, 10) + 'px';
       }; break;
+      default: break;
     }
   }
 }
