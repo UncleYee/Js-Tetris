@@ -1,35 +1,62 @@
+// 定义坐标
+const x = 0, y = 0;
 // 定义移动的基本单位
-const move = 20;
+const size = 20;
+// 定义形状
+const shape = [2,0,2,1,2,2,1,2];
 
-// 监听键盘事件 上下左右
-document.onkeydown = (event) => {
-  const models = document.getElementsByClassName("defaultModel");
-  const len = models.length;
-  for (let i = 0; i < len; i++) {
-    const model = models[i];
-    const top = parseInt(model.style.top || 0, 10);
-    console.log(top);
-    const left = parseInt(model.style.left || 0, 10);
-    console.log(left);
-    console.log(model);
+// 显示方块
+show = () => {
+  const divs = document.getElementsByClassName("defaultModel");
+  for (let i = 0; i <divs.length; i++) {
+    divs[i].style.top = (shape[i * 2 + 1] - y) * size + "px";
+    divs[i].style.left = (shape[i * 2] - x) * size + "px";
+  }
+}
+
+// 移动
+move = (a, b)=> {
+  x += a;
+  y += b;
+  show();
+}
+
+// 旋转
+rotate = () => {
+  shape = [shape[1], 3 - shape[0], shape[3], 3 - shape[2], shape[5], 3 - shape[4], shape[7], 3 - shape[6]];
+  show();
+}
+
+// 初始化
+var init = () => {
+  // 创建四个 div
+  for (let i = 0; i < 4; i++) {
+    const div = document.createElement("div");
+    div.className = "defaultModel";
+    document.body.appendChild(div);
+  }
+
+  show();
+
+  // 监听键盘事件 上下左右
+  document.onkeydown = (event) => {
     if (event) {
       switch(event.keyCode){
-        case 37: { // 左
-          if (left >= 20) {
-            model.style.left = parseInt(left - move, 10) + 'px';
-          }
-        }; break;
-        case 38: { // 上
-          if ( top >= 20) {
-            model.style.top = parseInt(top - move, 10) + 'px';
-          }
-        }; break;
-        case 39: { // 右
-          model.style.left = parseInt(left + move, 10) + 'px';
-        }; break;
-        case 40: { // 下
-          model.style.top = parseInt(top + move, 10) + 'px';
-        }; break;
+        case 32:
+          rotate();
+          break;
+        case 37: // 左
+          move(-1, 0)
+          break;
+        case 38: // 上
+          move(0, -1)
+          break;
+        case 39: // 右
+          move(1, 0);
+          break;
+        case 40: // 下
+          move(0, 1);
+          break;
         default: break;
       }
     }
