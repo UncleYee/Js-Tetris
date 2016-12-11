@@ -1,7 +1,9 @@
 .defaultModel {
-  position: absolute;
+  // display: inline-block;
+  position: relative;
   background: red;
   margin: 1px;
   height: 19px;
   width: 19px;
+  float: left;
 }
