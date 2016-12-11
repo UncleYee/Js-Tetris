@@ -3,7 +3,7 @@ const x = 0, y = 0;
 // 定义移动的基本单位
 const size = 20;
 // 定义形状
-const shape = [2,0,2,1,2,2,1,2];
+const shape = [0,0,1,0,2,0,2,1];
 
 // 显示方块
 show = () => {
