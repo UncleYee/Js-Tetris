@@ -1,16 +1,16 @@
 // 定义坐标
-const x = 0, y = 0;
+let x = 0, y = 0;
 // 定义移动的基本单位
 const size = 20;
 // 定义形状
-const shape = [0,0,1,0,2,0,2,1];
+let shape = [0,0,1,0,2,0,2,1];
 
 // 显示方块
 show = () => {
   const divs = document.getElementsByClassName("defaultModel");
   for (let i = 0; i <divs.length; i++) {
-    divs[i].style.top = (shape[i * 2 + 1] - y) * size + "px";
-    divs[i].style.left = (shape[i * 2] - x) * size + "px";
+    divs[i].style.top = (shape[i * 2 + 1] + y) * size + "px";
+    divs[i].style.left = (shape[i * 2] + x) * size + "px";
   }
 }
 
