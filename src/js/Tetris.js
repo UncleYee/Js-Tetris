@@ -48,14 +48,14 @@ var init = () => {
   document.onkeydown = (event) => {
     if (event) {
       switch(event.keyCode){
-        case 32:
-          rotate();
+        case 32: // 空格旋转
           break;
         case 37: // 左
           move(-1, 0)
           break;
         case 38: // 上
-          move(0, -1)
+          rotate();
+          // move(0, -1)
           break;
         case 39: // 右
           move(1, 0);
