@@ -29,6 +29,12 @@ rotate = () => {
 
 // 初始化
 var init = () => {
+  // 创建游戏区域
+  const back = document.createElement("div");
+  back.className = "gameBack";
+  document.body.appendChild(back);
+
+
   // 创建四个 div
   for (let i = 0; i < 4; i++) {
     const div = document.createElement("div");
