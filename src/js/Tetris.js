@@ -6,7 +6,7 @@ const size = 20;
 let shape = [0,0,1,0,2,0,2,1];
 
 // 显示方块
-show = () => {
+const show = () => {
   const divs = document.getElementsByClassName("defaultModel");
   for (let i = 0; i <divs.length; i++) {
     divs[i].style.top = (shape[i * 2 + 1] + y) * size + "px";
@@ -15,20 +15,20 @@ show = () => {
 }
 
 // 移动
-move = (a, b)=> {
+const move = (a, b)=> {
   x += a;
   y += b;
   show();
 }
 
 // 旋转
-rotate = () => {
+const rotate = () => {
   shape = [shape[1], 3 - shape[0], shape[3], 3 - shape[2], shape[5], 3 - shape[4], shape[7], 3 - shape[6]];
   show();
 }
 
 // 初始化
-var init = () => {
+const init = () => {
   // 创建游戏区域
   const back = document.createElement("div");
   back.className = "gameBack";
@@ -43,7 +43,7 @@ var init = () => {
   }
 
   show();
-
+  
   // 监听键盘事件 上下左右
   document.onkeydown = (event) => {
     if (event) {
