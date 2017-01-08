@@ -33,17 +33,17 @@ const rotate = () => {
 
 // 边界检查
 const check = (x, y, shape) => {
-  const left = colCount;
-  const right = 0;
-  const top = rowCount;
-  const bottom = 0;
+  let left = colCount;
+  let right = 0;
+  let top = rowCount;
+  let bottom = 0;
 
   for (let i = 0; i < 8; i +=2) {
     // 最左边的水平坐标
-    if (shape[i] < left ) { left = shape[i]}
-    if (shape[i] > right) { right = shape[i]}
-    if (shape[i + 1] < top) {top = shape[i + 1]}
-    if (shape[i + 1] > bottom) {bottom = shape[i + 1]}
+    if (shape[i] < left ) { left = shape[i];}
+    if (shape[i] > right) { right = shape[i];}
+    if (shape[i + 1] < top) {top = shape[i + 1];}
+    if (shape[i + 1] > bottom) {bottom = shape[i + 1];}
   }
 
   if ((right + x + 1) > colCount || (left + x) < 0 ||
