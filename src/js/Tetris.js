@@ -8,21 +8,34 @@ let shape = [2,0,2,1,2,2,1,2];
 const rowCount = 18;
 const colCount = 10;
 
+let intervalId;
+let intervalId2;
+const speed = 600; // 自动下降速度
+
 // 显示方块
 const show = () => {
   const divs = document.getElementsByClassName("defaultModel");
   for (let i = 0; i <divs.length; i++) {
-    divs[i].style.top = (shape[i * 2 + 1] + y) * size + "px";
-    divs[i].style.left = (shape[i * 2] + x) * size + "px";
+    const top = (shape[i * 2 + 1] + y) * size;
+    const left = (shape[i * 2] + x) * size;
+    divs[i].style.top = `${top}px`;
+    divs[i].style.left = `${left}px`;
   }
 }
 
 // 移动
 const move = (a, b)=> {
-  if (!check(x + a, y + b, shape)) return false;
-  x += a;
-  y += b;
-  show();
+  if (check(x + a, y + b, shape)) {
+    x += a;
+    y += b;
+    show();
+  } else {
+    if (b === 0) {return;}
+    fix();
+    create();
+    show();
+    clearInterval(intervalId2);
+  }
 }
 
 // 旋转
@@ -38,7 +51,7 @@ const check = (x, y, shape) => {
   let top = rowCount;
   let bottom = 0;
 
-  for (let i = 0; i < 8; i +=2) {
+  for (let i = 0; i < 8; i += 2) {
     // 最左边的水平坐标
     if (shape[i] < left ) { left = shape[i];}
     if (shape[i] > right) { right = shape[i];}
@@ -53,6 +66,30 @@ const check = (x, y, shape) => {
   return true;
 }
 
+// 快速下降
+const quickDown = () => {
+  intervalId2 = setInterval("move(0,1)", 0);
+}
+
+// 到达底部 固定方块 编程灰色
+const fix = () => {
+  const divs = document.getElementsByClassName('defaultModel');
+  for (let i = divs.length - 1; i >= 0; i--) {
+    divs[i].className = 'fixedModel';
+  }
+  x = 3;
+  y = 0;
+}
+
+const create = () => {
+  // 创建四个 div
+  for (let i = 0; i < 4; i++) {
+    const div = document.createElement("div");
+    div.className = "defaultModel";
+    document.body.appendChild(div);
+  }
+}
+
 // 初始化
 const init = () => {
   // 创建游戏区域
@@ -61,12 +98,7 @@ const init = () => {
   document.body.appendChild(back);
 
 
-  // 创建四个 div
-  for (let i = 0; i < 4; i++) {
-    const div = document.createElement("div");
-    div.className = "defaultModel";
-    document.body.appendChild(div);
-  }
+  create();
 
   show();
   
@@ -74,7 +106,8 @@ const init = () => {
   document.onkeydown = (event) => {
     if (event) {
       switch(event.keyCode){
-        case 32: // 空格旋转
+        case 32: // 空格旋转 
+          quickDown();
           break;
         case 37: // 左
           move(-1, 0)
@@ -93,4 +126,7 @@ const init = () => {
       }
     }
   }
+
+  // 方块开始下降
+  intervalId = setInterval("move(0, 1)", speed);
 }
