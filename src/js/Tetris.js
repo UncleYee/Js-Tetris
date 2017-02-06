@@ -8,8 +8,8 @@ let shape = [2,0,2,1,2,2,1,2];
 const rowCount = 18;
 const colCount = 10;
 
-let intervalId;
-let intervalId2;
+let defaultInterval; // 默认下降的 interval
+let quickInterval; // 快速下降的 interval
 const speed = 600; // 自动下降速度
 
 // 显示方块
@@ -34,7 +34,7 @@ const move = (a, b)=> {
     fix();
     create();
     show();
-    clearInterval(intervalId2);
+    clearInterval(quickInterval);
   }
 }
 
@@ -68,7 +68,7 @@ const check = (x, y, shape) => {
 
 // 快速下降
 const quickDown = () => {
-  intervalId2 = setInterval("move(0,1)", 0);
+  quickInterval = setInterval("move(0,1)", 0);
 }
 
 // 到达底部 固定方块 编程灰色
@@ -128,5 +128,5 @@ const init = () => {
   }
 
   // 方块开始下降
-  intervalId = setInterval("move(0, 1)", speed);
+  defaultInterval = setInterval("move(0, 1)", speed);
 }
