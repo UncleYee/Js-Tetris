@@ -1,9 +1,21 @@
+// 所有形状
+const SHAPES = [
+  [0,1,1,1,2,1,3,1],
+  [1,0,1,1,1,2,2,2],
+  [2,0,2,1,2,2,1,2],
+  [0,1,1,1,1,2,2,2],
+  [1,2,2,2,2,1,3,1],
+  [1,1,2,1,1,2,2,2],
+  [0,2,1,2,1,1,2,2]
+];
 // 定义坐标
 let x = 0, y = 0;
 // 定义移动的基本单位
 const size = 20;
 // 定义形状
-let shape = [2,0,2,1,2,2,1,2];
+const shape = [];
+const shapeDiv = [];
+const container = {};
 // 定义边界
 const rowCount = 18;
 const colCount = 10;
@@ -40,7 +52,9 @@ const move = (a, b)=> {
 
 // 旋转
 const rotate = () => {
-  shape = [shape[1], 3 - shape[0], shape[3], 3 - shape[2], shape[5], 3 - shape[4], shape[7], 3 - shape[6]];
+  const newShape = [shape[1], 3 - shape[0], shape[3], 3 - shape[2], shape[5], 3 - shape[4], shape[7], 3 - shape[6]];
+  if(!check(x,y,newShape)) {return;}
+  shape = newShape;
   show();
 }
 
@@ -75,17 +89,30 @@ const quickDown = () => {
 const fix = () => {
   const divs = document.getElementsByClassName('defaultModel');
   for (let i = divs.length - 1; i >= 0; i--) {
+    const px = shape[2 * i + 1] + y;
+    const py = shape[2 * 1] + x;
+    container[`${px}_${py}`] = shapeDiv[i];
     divs[i].className = 'fixedModel';
   }
   x = 3;
   y = 0;
 }
 
+// 随机获取一个方块数组
+const randomShape = () => {
+  shape = SHAPES[Math.random() * 7];
+}
+
 const create = () => {
+  x = 3;
+  y = 0;
+  shapeDiv = [];
+  randomShape();
   // 创建四个 div
   for (let i = 0; i < 4; i++) {
     const div = document.createElement("div");
     div.className = "defaultModel";
+    shapeDiv[i] = div;
     document.body.appendChild(div);
   }
 }
