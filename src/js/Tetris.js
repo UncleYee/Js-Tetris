@@ -71,13 +71,13 @@ let check = (x, y, shape) => {
 
   for (let i = divs.length - 1; i >= 0; i--) {
     // 最左边的水平坐标
-    if (shape[i] < left ) { left = shape[i];}
+    if (shape[2 * i] < left ) { left = shape[2 * i];}
     // 最右边的水平坐标
-    if (shape[i] > right) { right = shape[i];}
+    if (shape[2 * i] > right) { right = shape[2 * i];}
     // 最上边的水平坐标
-    if (shape[i + 1] < top) {top = shape[i + 1];}
+    if (shape[2 * i + 1] < top) {top = shape[2 * i + 1];}
     // 最下边的水平坐标
-    if (shape[i + 1] > bottom) {bottom = shape[i + 1];}
+    if (shape[2 * i + 1] > bottom) {bottom = shape[2 * i + 1];}
     // 判断方块之间是否重叠
     let px = shape[2 * i + 1] + y;
     let py = shape[2 * i] + x;
@@ -98,7 +98,7 @@ let quickDown = () => {
   quickInterval = setInterval("move(0,1)", 0);
 }
 
-// 到达底部 固定方块 编程灰色
+// 到达底部 固定方块 变成灰色
 let fix = () => {
   let divs = document.getElementsByClassName('defaultModel');
   for (let i = divs.length - 1; i >= 0; i--) {
