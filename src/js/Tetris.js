@@ -1,6 +1,6 @@
 'use strict';
 // 所有形状
-let SHAPES = [
+const SHAPES = [
   [0,1,1,1,2,1,3,1],
   [1,0,1,1,1,2,2,2],
   [2,0,2,1,2,2,1,2],
@@ -12,18 +12,18 @@ let SHAPES = [
 // 定义坐标
 let x = 0, y = 0;
 // 定义移动的基本单位
-let size = 20;
+const size = 20;
 // 定义形状
 let shape = [];
 let shapeDiv = [];
 let container = {};
 // 定义边界
-let rowCount = 18;
-let colCount = 10;
+const rowCount = 18;
+const colCount = 10;
 
 let defaultInterval; // 默认下降的 interval
 let quickInterval; // 快速下降的 interval
-let speed = 600; // 自动下降速度
+const speed = 600; // 自动下降速度
 
 // 显示方块
 let show = () => {
